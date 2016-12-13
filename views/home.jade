@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1 Welcome To Your Voting Booth:
+    a.btn.btn-primary(href="/admin/polls/add") Create A New Poll
+    a.btn.btn-default(href="/admin/adminpolls/#{user.id}") Edit Or Delete Your Poll
+    a.btn.btn-success(href="/admin/polls") Go To All Polls

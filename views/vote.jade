@@ -1,0 +1,30 @@
+extends layout
+block content
+
+
+    form(method="post")
+        //if query-true-false === true
+            dont display usable form, show already voted
+        fieldset.form-group
+            h1
+                th= poll.name
+        form
+            table
+                each choice in poll.choices
+                    tr
+                        td=choice.option
+
+                            input(type='radio',value=choice.value id=choice.option name="Answer" class="clsAnswer",  style='margin:10px')
+
+            br
+            a.btn.btn-success(type="button", value="Submit Vote", id="btnVote") Submit
+            a.btn.btn-default(href="/admin/polls") Cancel
+
+
+
+
+
+
+    script(src="/jquery.min.js", type="text/javascript")
+    script(src="/input.js",type="text/javascript")
+    script ( href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel = "stylesheet", integrity = "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin = "anonymous")

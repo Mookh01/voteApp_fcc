@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+    h1 Polling Activity:
+    h4 To Shorten Poll URL: Click the Radio Button, Then Click the Shorten Button.
+    .row
+        center.col-lg-offset-4.col-lg-4.col-lg-offset-4
+            span.input-group-btn
+                button.btn.btn-warning.btn-shorten.btn-block(type='button') SHORTEN
+            span.input-group-btn
+            .input-group.input-group-md
+                center#link
+
+
+    table.table.table-hover
+        thead
+            tr
+                td POLL NAME
+                td SHORTEN POLL URL
+                td VOTE
+                td CHART
+
+        tbody
+        each poll in polls
+                tr
+                    td(style="width: 100px;")= poll.name
+
+                    td(style="width: 100px;")
+                            input(type='radio',value=poll.url id=poll.name name="Answer" class="clsAnswer",  style='margin:10px')
+
+                    td(style="width: 100px;"): a(href="/vote/#{poll.id}")
+                        span.glyphicon.glyphicon-check
+
+                    td(style="width: 100px;"): a(href="/chart/#{poll.id}")
+                        span.glyphicon.glyphicon-stats
+
+
+
+    script(src="/jquery.min.js", type="text/javascript")
+    script(src="/input.js",type="text/javascript")
+    script(href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel = "stylesheet", integrity = "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin = "anonymous")

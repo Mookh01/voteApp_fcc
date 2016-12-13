@@ -1,0 +1,64 @@
+extends layout
+block content
+
+
+    form(method="post")
+        fieldset.form-group
+            h1
+                th=poll.name
+        form
+            table
+                each choice in poll.choices
+                    tr
+                        td#option= choice.option
+                        td#value= choice.value
+
+            #chartContainer(style="height: 300px; width: 100%;")
+            br
+            a.btn.btn-default(href="/admin/polls") Return
+
+    script(type="text/javascript").
+
+        window.onload = function () {
+            var c = document.getElementsByTagName("td");
+            var n = c.length
+            var dataPoints = [];
+
+            for(i=0;i<n;i++) {
+                var x = document.getElementsByTagName("td")[i].innerHTML;
+                dataPoints.push(x);}
+            var labelS = [];
+            var valueS = [];
+            for(j=0;j<n;){
+                t = dataPoints[j];
+                y = parseInt(t);
+                if(j%2 === 0){
+                    labelS.push(t);
+                } else {valueS.push(y)}
+                j++;
+            }
+            var dataP = [];
+            for(c=0;c<labelS.length;c++){
+                var char =    {"label":labelS[c] , "y":valueS[c] }
+                dataP.push(char);
+            }
+            console.log(dataP);
+
+            $("#chartContainer").CanvasJSChart({
+                title: {  text: ""},
+                axisY: {titleFontColor: "black", titleFontSize: 20, titleFontWeight: "bold", title: "Votes",interval: 1, labelFontSize: 20, labelFontColor: "black",labelFontWeight: "bold"},
+                axisX: { reversed: false, labelFontSize: 20, labelFontColor: "black",labelFontWeight: "bold", interval: 1,},
+                data: [{
+                    type: "bar",
+                    dataPoints: dataP
+                }]
+            });
+        }
+
+
+
+
+    script(src="/jquery.min.js", type="text/javascript")
+    script(src="/input.js",type="text/javascript")
+    script ( href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel = "stylesheet", integrity = "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin = "anonymous")
+    script(src="/jquery.canvasjs.min.js", type="text/javascript")

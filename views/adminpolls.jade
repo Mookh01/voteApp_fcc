@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 Polling Created By Admin:
+    table.table.table-hover
+        thead
+            tr
+                td POLL NAME
+                td DELETE
+                td EDIT
+
+        tbody
+            each poll in polls
+
+
+                tr
+                    td= poll.name
+                    td(style="width: 100px;"): a(href="/admin/delete/#{poll._id}")
+                        span.glyphicon.glyphicon-remove
+                    td(style="width: 100px;"): a(href="/admin/edit/#{poll._id}")
+                        span.glyphicon.glyphicon-pencil
+
+    script(src="/jquery.min.js", type="text/javascript")
+    script ( href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel = "stylesheet", integrity = "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin = "anonymous")
+

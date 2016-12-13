@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h1 CREATE YOUR POLL BELOW:
+
+
+    form(method="post")
+        button#post.btn.btn-primary(type="submit") Submit
+        a.btn.btn-default(href="/") Cancel
+
+        fieldset.form-group
+            label( for="") Name:
+            input#polls.form-control(name="name", type="text", placeholder="Enter a Poll name", required)
+            small.text-muted Give a Meaningful Title.
+        fieldset.form-group
+            label( for="") Option 1:
+            input.form-control(name="choice", type="text", placeholder="Enter option",  required)
+            label( for="") Option 2:
+            input.form-control(name="choice", type="text", placeholder="Enter option",  required)
+            #addpost
+            label(for='addedOption')
+
+        button#add.btn.btn-warning(name='text' type="button") Add Option
+
+    script(src="/jquery.min.js", type="text/javascript")
+    script(src='/input.js',type="text/javascript")
+
+
+
+        textarea.form-control (name="choice", type="text" )

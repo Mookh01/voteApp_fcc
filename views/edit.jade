@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 You Can Only Edit The Name Of The Poll
+
+    form(method="post")
+        fieldset.form-group
+            h2 Editing Name for " #{poll.name}"
+            label( for="") Name:
+            input.form-control(name="name", type="text", placeholder="Enter a name", value="#{poll.name}")
+            small.text-muted Give a Meaningful Title.
+        button.btn.btn-primary(type="submit", value="Submit") Save Poll Name
+        a.btn.btn-default(href="/admin/polls") Cancel
+
+
+    //script(src="/admin.js",type="text/javascript")
