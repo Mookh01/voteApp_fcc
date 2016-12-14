@@ -1,6 +1,14 @@
-/node_modules
-npm-debug.log
-access.log
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+# Logs
+logs
+*.log
+npm-debug.log*
 logging.txt
 .DS_Store
 /*.env
