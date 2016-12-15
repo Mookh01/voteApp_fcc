@@ -12,7 +12,8 @@ var passport = require("passport");
 var base58 = require('./base58.js');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose.connect('mongodb://' + process.env.DATABASE_URL + process.env.DB_DOCUMENT || 'mongodb://localhost:27017/pollingtest');
+//mongoose.connect('mongodb://' + (process.env.DATABASE_URL|| 'localhost:27017/pollingtest'));
+mongoose.connect(process.env.DB_DOCUMENT || 'mongodb://localhost:27017/pollingtest');
 //CONNECT FLASH
 var flash = require('connect-flash');
 
@@ -70,7 +71,7 @@ app.use(function(req, res, next) {
     res.locals.user = req.user || null;
     next();
 });
-
+""
 
 app.get('/home', ensureAuthenticated, function(req, res) {
     res.render("home", { title: "Home" });
