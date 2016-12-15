@@ -71,7 +71,7 @@ app.use(function(req, res, next) {
     res.locals.user = req.user || null;
     next();
 });
-""
+
 
 app.get('/home', ensureAuthenticated, function(req, res) {
     res.render("home", { title: "Home" });
