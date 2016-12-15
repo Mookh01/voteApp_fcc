@@ -12,7 +12,7 @@ var passport = require("passport");
 var base58 = require('./base58.js');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose.connect(process.env.DATABASE_URL + process.env.DB_DOCUMENT);
+mongoose.connect('mongodb://' + process.env.DATABASE_URL + process.env.DB_DOCUMENT);
 //CONNECT FLASH
 var flash = require('connect-flash');
 
