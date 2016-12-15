@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/home', ensureAuthenticated, function(req, res) {
+app.get('/', ensureAuthenticated, function(req, res) {
     res.render("home", { title: "Home" });
 });
 
@@ -85,7 +85,9 @@ function ensureAuthenticated(req, res, next) {
     }
 }
 
-
+app.get('/home', ensureAuthenticated, function(req, res) {
+    res.render("home", { title: "Home" });
+});
 var authRouter = require("./auth");
 app.use('/auth', authRouter);
 
