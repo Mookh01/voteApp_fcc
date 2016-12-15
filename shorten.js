@@ -21,7 +21,7 @@ router.post('/api/shorten', function(req, res) {
     var shortUrl = '';
     Url.findOne({ long_url: longUrl }, function(err, doc) {
         if (doc) { //IF FOUND
-            shortUrl = process.env.PORT + 'shorten/' + base58.encode(doc._id);
+            shortUrl = process.env.PORT + '/shorten/' + base58.encode(doc._id);
             res.send({ 'shortUrl': shortUrl }); //RETURNS EXISTING ENTRY
         } else { //IF NOT FOUND~~CREATE NEW
             var newUrl = Url({
@@ -31,7 +31,7 @@ router.post('/api/shorten', function(req, res) {
                 if (err) {
                     console.log(err);
                 }
-                shortUrl = process.env.PORT + 'shorten/' + base58.encode(newUrl._id);
+                shortUrl = process.env.PORT + '/shorten/' + base58.encode(newUrl._id);
                 res.send({ 'shortUrl': shortUrl })
             });
         }
