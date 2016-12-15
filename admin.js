@@ -92,5 +92,5 @@ router.route('/delete/:id')
         poll.findByIdAndRemove(pid, function(err) {
             if (err) throw err;
         });
-        res.redirect("/");
+        res.redirect("/home");
     });

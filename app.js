@@ -72,7 +72,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/', ensureAuthenticated, function(req, res) {
+app.get('/home', ensureAuthenticated, function(req, res) {
     res.render("home", { title: "Home" });
 });
 

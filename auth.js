@@ -6,10 +6,10 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
 
-router.get('/register', function(req, res){
+router.get('/register', function(req, res) {
     res.render('register');
 });
-router.post('/register', function(req, res){
+router.post('/register', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
@@ -20,85 +20,85 @@ router.post('/register', function(req, res){
     req.checkBody('password2', 'password2 is required').equals(req.body.password);
     var errors = req.validationErrors();
 
-    User.find({'username': username }, function(err, user){
+    User.find({ 'username': username }, function(err, user) {
         if (err) {
 
             console.log('Signup error');
             return done(err);
         };
 
-        if (user.length!=0){
-            if(user[0].username){
+        if (user.length != 0) {
+            if (user[0].username) {
                 console.log('Username already exists, username: ' + username);
                 req.flash('error_msg', "Username or Password already exists");
                 return res.redirect('/auth/register');
-            }else{
-            var err = new Error();
-            err.status = 310;
-            return done(err);
+            } else {
+                var err = new Error();
+                err.status = 310;
+                return done(err);
             }
-           }
-        else {
+        } else {
             var newUser = new User({
-            username: username,
-            password: password
-        });
-        User.createUser(newUser, function(err, user){
-            if(err) throw err;
-        });
+                username: username,
+                password: password
+            });
+            User.createUser(newUser, function(err, user) {
+                if (err) throw err;
+            });
 
-        req.flash('success_msg', "You're Registered, Please Login");
-       return res.redirect('/auth/login');
+            req.flash('success_msg', "You're Registered, Please Login");
+            return res.redirect('/auth/login');
         }
     });
 });
 //LOGIN
-router.get("/login", function (req, res) {
+router.get("/login", function(req, res) {
     res.render("login");
 });
 
-passport.serializeUser(function(user, done){
+passport.serializeUser(function(user, done) {
     done(null, user);
 });
 
-passport.deserializeUser(function(id, done){
+passport.deserializeUser(function(id, done) {
     User.getUserById(id, function(err, user) {
         done(err, user);
     });
 });
 
-    passport.use(new LocalStrategy(
-        function (username, password, done) {
-            User.getUserByUsername(username, function (err, user) {
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.getUserByUsername(username, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return done(null, false, { message: 'Unknown User' });
+            }
+
+            User.comparePassword(password, user.password, function(err, isMatch) {
                 if (err) throw err;
-                if (!user) {
-                    return done(null, false, {message: 'Unknown User'});
+                if (isMatch) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, { message: 'Invalid password' });
                 }
-
-                User.comparePassword(password, user.password, function (err, isMatch) {
-                    if (err) throw err;
-                    if (isMatch) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false, {message: 'Invalid password'});
-                    }
-                });
             });
-        }));
+        });
+    }));
 
-    router.post("/login", passport.authenticate('local', {
-        successRedirect: '/',
+router.post("/login", passport.authenticate('local', {
+        successRedirect: '/home',
         failureRedirect: '/auth/login',
-        failureFlash: true }),
-            function(req,res){
-                res.redirect('/');
+        failureFlash: true
+    }),
+    function(req, res) {
+        res.redirect('/home');
     });
 
-    //LOGOUT
-    router.get('/logout', function(req, res){
-        req.logout();
-        req.flash('success_msg', 'Your Are Logged Out');
-        res.redirect('/auth/login')
-    });
+//LOGOUT
+router.get('/logout', function(req, res) {
+    req.logout();
+    req.flash('success_msg', 'Your Are Logged Out');
+    res.redirect('/auth/login')
+});
 
 module.exports = router;
