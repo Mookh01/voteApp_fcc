@@ -8,6 +8,7 @@ var Localstrategy = require('passport-local').Strategy;
 var app = express();
 var Url = require('./models/url.js');
 var bodyParser = require("body-parser");
+var config = require('./config.js');
 var passport = require("passport");
 var base58 = require('./base58.js');
 var mongoose = require('mongoose');

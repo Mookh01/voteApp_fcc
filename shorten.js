@@ -1,5 +1,6 @@
 var express = require("express");
 var passport = require("passport");
+var config = require('./config.js');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var poll = require("./models/poll.js");
@@ -21,7 +22,8 @@ router.post('/api/shorten', function(req, res) {
     var shortUrl = '';
     Url.findOne({ long_url: longUrl }, function(err, doc) {
         if (doc) { //IF FOUND
-            shortUrl = process.env.PORT + '/shorten/' + base58.encode(doc._id);
+            shortUrl = config.webhost + 'shorten/' + base58.encode(doc._id);
+
             res.send({ 'shortUrl': shortUrl }); //RETURNS EXISTING ENTRY
         } else { //IF NOT FOUND~~CREATE NEW
             var newUrl = Url({
@@ -31,7 +33,8 @@ router.post('/api/shorten', function(req, res) {
                 if (err) {
                     console.log(err);
                 }
-                shortUrl = process.env.PORT + '/shorten/' + base58.encode(newUrl._id);
+                shortUrl = config.webhost + 'shorten/' + base58.encode(doc._id);
+
                 res.send({ 'shortUrl': shortUrl })
             });
         }
@@ -49,7 +52,7 @@ router.get('/:encoded_id', function(req, res) {
             res.redirect(doc.long_url);
 
         } else {
-            res.redirect(process.env.PORT + '/home');
+            res.redirect(process.env.PORT + 'home');
         }
     })
 });
