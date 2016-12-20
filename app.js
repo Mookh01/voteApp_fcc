@@ -31,9 +31,7 @@ app.use(express.static("node_modules/canvasjs/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//PORT CONNECTION
-app.set('port', (process.env.PORT || 3330))
-    //EXPRESS SESSIONS
+//EXPRESS SESSIONS
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: true,
@@ -105,6 +103,7 @@ var shortenRouter = require("./shorten");
 app.use('/shorten', shortenRouter);
 
 
-app.listen(app.get('port'), function() {
-    console.log("Node app is running on port", app.get('port'));
+var port = process.env.PORT || 4330;
+app.listen(port, function() {
+    console.log("Node app is running on " + port);
 });

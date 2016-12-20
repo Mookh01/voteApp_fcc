@@ -1,7 +1,4 @@
-var config = {};
-config.db = {};
-config.db.host = "admin:admin@ds133388.mlab.com:33388/heroku_h1kkh87n"
-config.db.name = 'pollingtest';
-config.webhost = 'https://localhost:3330/';
-
-module.exports = config;
+module.exports = {
+    PORT: process.env.PORT || 'http://localhost:4330/',
+    MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/pollingtest'
+};
