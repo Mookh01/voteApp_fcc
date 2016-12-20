@@ -18,7 +18,7 @@ mongoose.connect(process.env.DB_DOCUMENT || 'mongodb://localhost:27017/pollingte
 //CONNECT FLASH
 var flash = require('connect-flash');
 //PORT CONNECTION
-var port = process.env.PORT || 4330;
+
 
 //VIEW ENGINE
 app.set("views", "./views");
@@ -104,7 +104,7 @@ var shortenRouter = require("./shorten");
 app.use('/shorten', shortenRouter);
 
 
-
+var port = config.PORT || 4330;
 app.listen(port, function() {
     console.log("Node app is running on " + port);
 });
