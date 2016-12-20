@@ -2,6 +2,7 @@ var express = require("express");
 var poll = require("./models/poll.js");
 var User = require("./models/user.js");
 var base58 = require('./base58.js');
+var config = require('./config.js');
 var router = express.Router();
 module.exports = router;
 
