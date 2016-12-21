@@ -51,7 +51,7 @@ $(function() {
         var selectedValue = selected.val();
         $.ajax({
             type: 'POST',
-            url: '/shorten/api/shorten', //Might need '/shorten/api/shorten'
+            url: '/shorten/api/shorten',
             dataType: 'json',
             data: { url: selectedValue },
             success: function(data) {
