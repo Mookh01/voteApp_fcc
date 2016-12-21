@@ -46,6 +46,7 @@ router.route('/polls/add')
                 if (err) throw err;
             });
         }
+        console.log(config.MONGODB_URI);
         console.log(config.PORT + 'vote/' + newPoll._id);
         res.redirect(req.baseUrl + "/polls");
 

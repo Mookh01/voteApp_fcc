@@ -14,7 +14,7 @@ var base58 = require('./base58.js');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 //mongoose.connect('mongodb://' + (process.env.DATABASE_URL|| 'localhost:27017/pollingtest'));
-mongoose.connect(process.env.DB_DOCUMENT || 'mongodb://localhost:27017/pollingtest');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pollingtest');
 //CONNECT FLASH
 var flash = require('connect-flash');
 //PORT CONNECTION
@@ -104,7 +104,11 @@ var shortenRouter = require("./shorten");
 app.use('/shorten', shortenRouter);
 
 var server = require('http').createServer();
-var port = process.env.PORT || 4330;
-app.listen(port, function() {
-    console.log("Node app is running on " + port);
+// var port = process.env.PORT || 4330;
+// app.listen(port, function() {
+//     console.log("Node app is running on " + port);
+// });
+
+app.listen(process.env.PORT || 4330, function() {
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
