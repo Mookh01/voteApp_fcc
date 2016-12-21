@@ -52,7 +52,7 @@ router.get('/:encoded_id', function(req, res) {
             res.redirect(doc.long_url);
 
         } else {
-            res.redirect(process.env.PORT + 'home');
+            res.redirect(process.env.PORT);
         }
     })
 });
