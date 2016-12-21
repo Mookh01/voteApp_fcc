@@ -42,7 +42,7 @@ router.route('/polls/add')
         });
         //"updatePoll creates the long url so that we can later find it and shorten it.
         var updatePoll = function() {
-            poll.update({ _id: { $eq: newPoll._id } }, { $set: { url: config.PORT + 'vote/' + newPoll._id } }, function(err, result) {
+            poll.update({ _id: { $eq: newPoll._id } }, { $set: { url: process.env.PORT + 'vote/' + newPoll._id } }, function(err, result) {
                 if (err) throw err;
             });
         }

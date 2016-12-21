@@ -103,8 +103,8 @@ app.use('/vote', voteRouter);
 var shortenRouter = require("./shorten");
 app.use('/shorten', shortenRouter);
 
-
-var port = config.PORT || 4330;
+var server = require('http').createServer();
+var port = process.env.PORT || 4330;
 app.listen(port, function() {
     console.log("Node app is running on " + port);
 });
