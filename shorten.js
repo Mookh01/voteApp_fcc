@@ -22,7 +22,12 @@ router.post('/api/shorten', function(req, res) {
     var shortUrl = '';
     Url.findOne({ long_url: longUrl }, function(err, doc) {
         if (doc) { //IF FOUND
-            shortUrl = process.env.PORT + 'shorten/' + base58.encode(doc._id);
+            if (process.env.PORT === undefined) {
+                shortUrl = 'https://vast-caverns-36392.herokuapp.com/shorten/' + base58.encode(doc._id);
+            } else {
+                shortUrl = process.env.PORT + 'shorten/' + base58.encode(doc._id);
+            }
+
 
             res.send({ 'shortUrl': shortUrl }); //RETURNS EXISTING ENTRY
         } else { //IF NOT FOUND~~CREATE NEW
@@ -33,7 +38,11 @@ router.post('/api/shorten', function(req, res) {
                 if (err) {
                     console.log(err);
                 }
-                shortUrl = process.env.PORT + 'shorten/' + base58.encode(doc._id);
+                if (process.env.PORT === undefined) {
+                    shortUrl = 'https://vast-caverns-36392.herokuapp.com/shorten/' + base58.encode(newUrl._id);
+                } else {
+                    shortUrl = process.env.PORT + 'shorten/' + base58.encode(newUrl._id);
+                }
 
                 res.send({ 'shortUrl': shortUrl })
             });

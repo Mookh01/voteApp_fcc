@@ -13,6 +13,7 @@ var passport = require("passport");
 var base58 = require('./base58.js');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+mongoose.Promise = global.Promise;
 //mongoose.connect('mongodb://' + (process.env.DATABASE_URL|| 'localhost:27017/pollingtest'));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pollingtest');
 //CONNECT FLASH
