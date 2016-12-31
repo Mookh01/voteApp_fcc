@@ -1,6 +1,7 @@
 # voteApp_fcc
 A voting application for Free Code Camp
 
-After downloading the necessary node_modules. You should be able to start the application in your command line with; node app.js
+Register then Login and create a unique user. Once you've logged in
+you can create a poll and share a shortened URL with your friends. 
 
-The localhost will be 4330
+For a working example please go to:  https://vast-caverns-36392.herokuapp.com/auth/login
